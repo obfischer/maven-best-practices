@@ -1,0 +1,32 @@
+= How to survive a Maven Project
+
+First of all: There is nothing wrong with Maven.
+I have been using Maven for years, and it has always been my preferred build tool.
+Apache Maven is an opinionated build tool for JVM-based software projects.
+It has a clear idea of how a standard project should look, which phases exist, and the actions belonging to each phase.
+But every software project is different.
+Therefore, Maven allows us to adapt the predefined build process using plugins to change the default behavior or to add new functionality.
+In contrast to other build tools, the Maven way to alter your build process is to use plugins or to write your own plugins.
+
+So quite easy.
+What can go wrong?
+
+== Complexity from Quantity
+
+Even if Maven is an easy tool, it gives you a degree of freedom to use it and to alter its behavior.
+If a project grows by modules or actions required to build your project, every small extension and configuration change will sum up, and in the end, your Maven project will become more and more complex and harder to maintain.
+This effect can be observed everywhere, also in the real world.
+
+Imagine you have your own garage for your private bike.
+From time to time, you will buy more and more tools and accessories.
+
+Sooner or later, you will have so much that you need a system to be able to find each piece.
+Maybe you will buy a tool cabinet or only some small boxes to sort all your items according to your system.
+Somehow you have to find your way to deal with the complexity arising from quantity.
+
+== The Need of Standards
+
+And this is what this guide is about.
+How to survive and live happily with your Maven project by following some best practices.
+Maybe some of the advice given in this guide seems unnecessary for your project, but that is the nature of best practices.
+But I think that following them helps you to avoid problems, so that your project will never suffer from problems others have, and you can finish your work faster.
