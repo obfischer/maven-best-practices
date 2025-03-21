@@ -2,3 +2,5 @@
 ** xref:overview.adoc[The Motivation]
 ** xref:survive-a-maven-project.adoc[]
 
+* Best Practices
+** xref:project-name-and-prefix.adoc[]

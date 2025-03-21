@@ -1,0 +1,56 @@
+// section_id_prefix: pnpp_
+= Project Name and the Project Prefix
+
+"There are only two hard things in Computer Science: cache invalidation and naming things."
+-- Phil Karlton, https://www.karlton.org/2017/12/naming-things-hard/[^]
+
+A common joke in software development is that naming is hard.
+Having a name for something allows us to talk about it.
+You can name it, and everybody knows what you are talking about.
+Isn't that great?
+A single word, and everybody can understand it.
+If it isn't already part of our https://martinfowler.com/bliki/UbiquitousLanguage.html[ubiquitous language^], it might become one.
+So, let's get started.
+
+[#pnpp_recommendation]
+== Recommendation
+
+
+1. Choose a name for your project that best reflects it.
+2. Choose a short abbreviation for your project, with at least three letters.
+
+[#pnpp_rationale]
+== Rationale
+
+"If you think your project deserves a dedicated Maven project, then it also deserves its own name and namespace."
+-- Oliver B. Fischer
+
+A good project name eases your communication and helps you avoid that people will call your project or its resulting artifacts differently.
+I have seen companies where people have been using different names for the same project, and this can lead to misunderstandings and confusion.
+
+Furthermore, a well-established name also helps you search for it in case you have to look up some information in the systems of your organization.
+Therefore, I recommend finding, forming, and using a ubiquitous language for your project.
+This idea of having a unique, clear, and precise language should also be applied to your build system.
+You should consider it as the bounded context of your build.
+
+For a fictitious billing system, a project name like _Customer Billing System_ perfectly reflects what the system is doing.
+Everyone reading this name will have more or less an idea of what the system is doing.
+
+The prefix based on your project name can be used as a prefix for your Maven properties and Maven coordinates.
+All these measures will help you later to find your Maven artifacts in your repository system (e.g. Nexus, Artifactory) much more easily.
+Even autocompletion becomes easier, as you only have to know the prefix to limit the suggestions to a reasonable amount.
+
+[#pnpp_example]
+== Example
+
+To illustrate this recommendation, let us have a look at the parent POM of a fictitious billing system for your customers.
+
+.Parent POM of a fictive Billing System
+[source,xml]
+----
+include::example$common-billing-system/pom.xml[]
+----
+<1> The name _Customer Billing System_ gives the project a unique name and serves as a source for the abbreviation `cbs`
+<2> `cbs` willbe  also used in the Maven coordinates of the project to make the name of the artifact unique within your Maven artifact universe
+<3> `cbs` will be also used as a common prefix for all project specific Maven properties, to differentiate them from properties used by plugins for Maven and Maven itself
+<4> Also, each Maven module will use the same prefix to ensure that it has a unique name for the module
