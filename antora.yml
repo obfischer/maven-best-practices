@@ -5,6 +5,9 @@ version: ~
 asciidoc:
   attributes:
     page-toclevels: 3
-    
+
 nav:
   - modules/ROOT/nav.adoc
+
+ext:
+  collector:
