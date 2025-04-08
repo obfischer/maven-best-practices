@@ -1,0 +1,41 @@
+
+// section_id_prefix: daam_
+= Don't abuse Maven
+
+"Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project's build, reporting and documentation from a central piece of information."
+-- Apache Maven Project Homepage
+
+
+[#daam_recommendation]
+== Recommendation
+
+. Use Maven only as tool to build, test, package and deploy your software artifacts.
+. Never use Maven as software management tool to install and maintain your software in any non-development stage.
+
+[#daam__rationale]
+== Rationale
+
+Maven was created as a tool for building software projects.
+
+Using Maven to manage software installations in production will cause problems. Although you may see quick results at first, the limits of this approach will quickly become apparent over time.
+
+Tools designed as software management tools such as Puppet, Ansible or Terraform automatically work with the status of the systems they manage, or at least support this.
+Such systems make it possible to describe the desired target state of a system.
+For example, which software packages should be installed in which version or what content configuration files should have after an execution.
+They can automatically create an execution plan that takes a system from its current state to the desired target state.
+
+Maven cannot do this on its own.
+Although Maven could be extended for this via its own lifecycle and plugins, the effort involved is disproportionate.
+
+Instead, take the time to learn how to use tools designed for this task.
+
+[#daam_example]
+== Example
+
+As Maven is a build tool, use it to build your software.
+
+.Proper use of Apache Maven
+[source,shell]
+----
+$ mvn clean install
+----

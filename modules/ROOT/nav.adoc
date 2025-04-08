@@ -3,4 +3,5 @@
 ** xref:survive-a-maven-project.adoc[]
 
 * Best Practices
+** xref:dont-abuse-maven.adoc[]
 ** xref:project-name-and-prefix.adoc[]
