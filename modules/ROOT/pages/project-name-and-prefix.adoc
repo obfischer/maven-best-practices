@@ -1,5 +1,5 @@
 // section_id_prefix: pnpp_
-= Project Name and the Project Prefix
+= Choose a Project Name and a Project Prefix
 
 "There are only two hard things in Computer Science: cache invalidation and naming things."
 -- Phil Karlton, https://www.karlton.org/2017/12/naming-things-hard/[^]
