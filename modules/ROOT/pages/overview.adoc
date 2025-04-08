@@ -11,3 +11,8 @@ I hope, dear reader, if you find them, you can find something useful for you.
 NOTE: Currently, this guide covers only Apache Maven 3.
 Maven 4 is currently under development and hasn't been released yet.
 As soon as I have gathered enough knowledge about Maven 4, I will update and extend this guide.
+
+== List of Best Practices
+
+. xref:dont-abuse-maven.adoc[]
+. xref:project-name-and-prefix.adoc[]
