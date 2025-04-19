@@ -1,0 +1,96 @@
+// section_id_prefix: kdup
+= Keep your Dependencies up to date
+:url-renovate: https://www.mend.io/renovate/
+:url-dependabot: https://github.com/dependabot/
+:url-versions-plugin: https://www.mojohaus.org/versions/versions-maven-plugin/
+:url-maven-versions-plugin-update-properties: https://www.mojohaus.org/versions/versions-maven-plugin/update-properties-mojo.html
+
+"Standing on the shoulders of giants"
+-- https://en.wikipedia.org/wiki/Standing_on_the_shoulders_of_giants[William of Conches^], 1123
+
+Dependencies are the foundation of the vast of our projects.
+Often not visible to us, they provide the majority of the functionality used at runtime compared to the code we write.
+
+So we should maintain them as good as well, just as we do it with the code we write.
+Otherwise, our code base will rot, as it becomes harder and harder to maintain.
+
+[#kdup_recommendation]
+== Recommendation
+
+. Keep the set of dependencies as small as possible
+. Ensure, that your test coverage is high enough to rely on the existing tests to verify wether an update OK or not
+. Check regularly for new versions
+. Automate the process of updating dependencies
+. Use the {url-versions-plugin}[Maven Versions Plugin^] for manual dependency updates
+. Use tools like {url-renovate}[Renovate^] or GitHub's {url-dependabot}[Dependabot^] to automate the process of updating dependencies
+
+[#kdup_rationale]
+== Rationale
+
+The vast majority of all software now consists of external libraries that enable us to build the applications we need.
+The code we write ourselves is important because it represents the desired business logic, but is only a small port of each application.
+
+The much larger part is build by the dependencies we use, which provide us with the necessary infrastructure for our projects.
+
+This can be compared very well to an iceberg.
+Our code is the small part of the iceberg that sticks out of the water.
+The much larger part, the dependencies, is mostly invisible.
+
+Therefore, dependencies should be kept always up to date as far as possible so that any security hole ca be closed quickly an incompatibilities can be identified at an early stage.
+
+[#kdup_example]
+== Example
+
+In a professional development organisation, the preferred way to perform dependency updates should be used established tools such as {url-renovate}[Renovate^] or {url-dependabot}[Dependabot].
+As these tools are constantly evolving, I recommend that you consult their documentation.
+Any possible example will be out of date quite quickly.
+
+=== Updating dependencies manually with the Maven Versions Plugin
+
+Using the {url-versions-plugin}[Maven Versions Plugin] it is quite simple to update a given Maven project manually quite quickly.
+The given example project uses https://commons.apache.org/proper/commons-lang/[Apache Commons Lang 3^] in an outdated version.
+As the project uses Maven properties to manage the used versions, the update will be performed with the help of the {url-maven-versions-plugin-update-properties}[`update-properties` goal].
+Please refer to the documentation of the plugin to see which goals are available to suit your needs.
+
+
+.Example project with outdated project dependencies
+[source,xml]
+----
+include::example$dependencies-update-1/pom.xml[]
+----
+
+The first step should always be to see which dependencies are candidates for updates.
+
+.Checking for outdated dependencies with the Maven Versions Plugin
+[source,xml]
+----
+$ mvn versions:display-dependency-updates
+include::example$dependencies-update-1/dependencies-update-1.log[]
+----
+
+The second step will be the update of the outdated dependencies.
+
+.Performing the update of outdated dependencies
+[source,xml]
+----
+$ mvn versions:update-properties
+include::example$dependencies-update-1/dependencies-update-2.log[]
+----
+
+After the Maven run, the updated project will use the latest versions.
+
+.Example project after updating the dependencies
+[source,xml]
+----
+include::example$dependencies-update-1/pom.xml.updated[]
+----
+
+[#kdup_references]
+== References
+
+. https://github.com/dependabot[Dependabot GitHub Organisation^]
+. https://docs.github.com/en/code-security/getting-started/dependabot-quickstart-guide[Dependabot GitHub Quickstart^]
+. {url-versions-plugin}[Maven Versions Plugin^]
+. {url-renovate}[Renovate^]
+
+// todo Link to the article on dependency management

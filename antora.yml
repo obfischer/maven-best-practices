@@ -11,3 +11,18 @@ nav:
 
 ext:
   collector:
+    run:
+      - command: mvn --log-file dependencies-update-1.log --no-transfer-progress versions:display-dependency-updates
+        dir: modules/ROOT/examples/dependencies-update-1
+      - command: cp pom.xml pom.xml.original
+        dir: modules/ROOT/examples/dependencies-update-1
+      - command: mvn --log-file dependencies-update-2.log --no-transfer-progress versions:update-properties
+        dir: modules/ROOT/examples/dependencies-update-1
+      - command: cp pom.xml pom.xml.updated
+        dir: modules/ROOT/examples/dependencies-update-1
+      - command: cp pom.xml.original pom.xml
+        dir: modules/ROOT/examples/dependencies-update-1
+    scan:
+      dir: modules/ROOT/examples/dependencies-update-1
+      files: '*.log'
+      into: modules/ROOT/examples

@@ -2,5 +2,9 @@
 /build
 /node_modules
 
+/modules/ROOT/examples/dependencies-update-1/dependencies-update-?.log
+/modules/ROOT/examples/dependencies-update-1/pom.xml.original
+/modules/ROOT/examples/dependencies-update-1/pom.xml.updated
+/modules/ROOT/examples/dependencies-update-1/pom.xml.versionsBackup
 *.html
 *~
