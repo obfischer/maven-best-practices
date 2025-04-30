@@ -24,5 +24,5 @@ ext:
         dir: modules/ROOT/examples/dependencies-update-1
     scan:
       dir: modules/ROOT/examples/dependencies-update-1
-      files: '*.log'
+      files: '**/*.log'
       into: modules/ROOT/examples
