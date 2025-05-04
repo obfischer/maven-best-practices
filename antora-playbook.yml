@@ -1,6 +1,6 @@
 site:
   title: Body of Knowledge for Apache Maven
-  start_page: mavenbestpractices::overview.adoc
+  start_page: mavenbestpractices::index.adoc
 
 content:
   sources:
