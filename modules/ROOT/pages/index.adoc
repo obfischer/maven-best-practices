@@ -1,4 +1,4 @@
-= My Maven Best Practices Guidelines
+= Maven Best Practices Guidelines
 :description: Common best practices for using Apache Maven 3 in real projects
 
 This guide summarizes my personal best practices I have collected and developed in using Apache Maven 3 in real projects.
