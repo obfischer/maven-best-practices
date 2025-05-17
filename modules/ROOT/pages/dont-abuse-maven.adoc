@@ -12,7 +12,7 @@
 . Use Maven only as tool to build, test, package and deploy your software artifacts.
 . Never use Maven as software management tool to install and maintain your software in any non-development stage.
 
-[#daam__rationale]
+[#daam_rationale]
 == Rationale
 
 Maven was created as a tool for building software projects.
