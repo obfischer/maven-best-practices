@@ -12,19 +12,24 @@ nav:
 ext:
   collector:
     run:
-      - command: mvn --log-file dependencies-update-1.log --no-transfer-progress versions:display-dependency-updates
+      # Note on the implementation
+      # I have to put all generated files into a dedicated directory. Leaving generated files in the examples
+      # directory and running the collector extension on the same directory will lead to failures.
+      # Oliver B. Fischer, 2025-05-18
+      - command: mvn --log-file ../../generated/dependencies-update-1.log --no-transfer-progress versions:display-dependency-updates
         dir: modules/ROOT/examples/dependencies-update-1
       - command: cp pom.xml pom.xml.original
         dir: modules/ROOT/examples/dependencies-update-1
-      - command: mvn --log-file dependencies-update-2.log --no-transfer-progress versions:update-properties
+      - command: mvn --log-file ../../generated/dependencies-update-2.log --no-transfer-progress versions:update-properties
         dir: modules/ROOT/examples/dependencies-update-1
-      - command: cp pom.xml pom.xml.updated
+      - command: cp pom.xml ../../generated/pom.xml.updated
         dir: modules/ROOT/examples/dependencies-update-1
       - command: cp pom.xml.original pom.xml
         dir: modules/ROOT/examples/dependencies-update-1
+      - command: cp pom.xml.original ../../generated/pom.xml
+        dir: modules/ROOT/examples/dependencies-update-1
     scan:
-      dir:
-        - modules/ROOT/examples/dependencies-update-1
+      dir: modules/ROOT/generated
       files:
         - '**/*.log'
         - '**/*.xml'

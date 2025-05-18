@@ -14,6 +14,7 @@ Often not visible to us, they provide the majority of the functionality used at 
 So we should maintain them as good as well, just as we do it with the code we write.
 Otherwise, our code base will rot, as it becomes harder and harder to maintain.
 
+
 [#kdup_recommendation]
 == Recommendation
 
@@ -65,7 +66,7 @@ The first step should always be to see which dependencies are candidates for upd
 [source,xml]
 ----
 $ mvn versions:display-dependency-updates
-include::example$dependencies-update-1/dependencies-update-1.log[]
+include::example$dependencies-update-1.log[]
 ----
 
 The second step will be the update of the outdated dependencies.
@@ -74,7 +75,7 @@ The second step will be the update of the outdated dependencies.
 [source,xml]
 ----
 $ mvn versions:update-properties
-include::example$dependencies-update-1/dependencies-update-2.log[]
+include::example$dependencies-update-2.log[]
 ----
 
 After the Maven run, the updated project will use the latest versions.
@@ -82,7 +83,7 @@ After the Maven run, the updated project will use the latest versions.
 .Example project after updating the dependencies
 [source,xml]
 ----
-include::example$dependencies-update-1/pom.xml.updated[]
+include::example$pom.xml.updated[]
 ----
 
 [#kdup_references]
