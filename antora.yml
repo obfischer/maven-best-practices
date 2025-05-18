@@ -23,6 +23,10 @@ ext:
       - command: cp pom.xml.original pom.xml
         dir: modules/ROOT/examples/dependencies-update-1
     scan:
-      dir: modules/ROOT/examples/dependencies-update-1
-      files: '**/*.log'
+      dir:
+        - modules/ROOT/examples/dependencies-update-1
+      files:
+        - '**/*.log'
+        - '**/*.xml'
+        - '**/*.xml.updated'
       into: modules/ROOT/examples
