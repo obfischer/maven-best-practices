@@ -22,6 +22,8 @@ ext:
         dir: modules/ROOT/examples/dependencies-update-1
       - command: mvn --log-file ../../generated/dependencies-update-2.log --no-transfer-progress versions:update-properties
         dir: modules/ROOT/examples/dependencies-update-1
+      - command: mvn --fail-never --log-file ../../generated/require-maven-version.log --no-transfer-progress verify
+        dir: modules/ROOT/examples/specify-maven-version
       - command: cp pom.xml ../../generated/pom.xml.updated
         dir: modules/ROOT/examples/dependencies-update-1
       - command: cp pom.xml.original pom.xml

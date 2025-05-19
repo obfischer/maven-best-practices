@@ -7,7 +7,7 @@
     <artifactId>depupdate-a</artifactId>
     <version>1.0.0</version>
     <properties>
-        <depa.commons-lang3.version>3.15.0</depa.commons-lang3.version>
+        <depa.commons-lang3.version>3.17.0</depa.commons-lang3.version>
     </properties>
 
     <dependencyManagement>
