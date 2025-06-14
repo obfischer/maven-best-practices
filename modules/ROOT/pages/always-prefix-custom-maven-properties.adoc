@@ -1,0 +1,65 @@
+// section_id_prefix: acmp_
+= Always prefix your custom Maven Properties
+:url-maven-failsafe-plugin: https://maven.apache.org/surefire/maven-failsafe-plugin/integration-test-mojo.html#skipTests
+:url-maven-surefire-plugin: https://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html#skipTests
+
+[#acmp_recommendation]
+== Recommendation
+
+1. Always use the xref:project-name-and-prefix.adoc[prefix selected for the project] for each project-specific Maven property.
+
+[acmp_rationale]
+== Rationale
+
+Properties play an important role in Maven. On the one hand, they allow a project to be configured individually and centrally and also to be parameterised.
+Maven itself and all Maven plugins also use the property mechanism for configuration.
+The encoding of the source code can be described via the `project.build.sourceEncoding` property.
+The `skipTests` property can be used to control the execution of tests by the Maven Surefire plugin and the Maven Failsafe plugin.
+
+
+The latter two plugins already clearly show how different the naming of properties can be. For Maven newcomers or people who have to familiarise themselves with the project for the first time, this increases the effort required to understand the project and identify the parts that are relevant to them.
+
+Even if we cannot influence the properties originating from the Maven universe, we can contribute to their differentiation by labelling our own properties and thus help to reduce the mental load in the project.
+
+[#acmp_example]
+== Example
+
+The following example shows an exemplary properties element of a fictitious Maven project.
+In the first listing, project-specific Maven properties without a prefix are used together with properties used by Maven itself or by Maven plugins.
+At first glance, it is not possible to differentiate between self-defined properties and others.
+
+.Section of Maven properties without a custom prefix
+[source,xml]
+----
+<properties>
+    <maven-compiler-plugin.version>3.10</maven-compiler-plugin-version>
+    <required-coverage-in-percent>75</minimal-required-coverage-in-percent>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.compilerReuseStrategy>reuseSame</maven.compiler.compilerReuseStrategy>
+    <checkstyle.config.location>../checkstyle.xml</checkstyle.config.location>
+    <dockerfile.skip>true</dockerfile.skip>
+    <skipTests>true</skipTests>
+</properties>
+----
+
+In the second example, the prefix `svc` selected for the project is used for project-specific properties.
+This makes it easy to distinguish your own properties from others.
+
+.Section of Maven properties with a custom prefix
+[source,xml]
+----
+<properties>
+    <svc.maven-compiler-plugin.version>3.10</svc.maven-compiler-plugin-version>
+    <svc.required-coverage-in-percent>75</svc.minimal-required-coverage-in-percent>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.compilerReuseStrategy>reuseSame</maven.compiler.compilerReuseStrategy>
+    <checkstyle.config.location>../checkstyle.xml</checkstyle.config.location>
+    <dockerfile.skip>true</dockerfile.skip>
+    <skipTests>true</skipTests>
+</properties>
+----
+
+[#acmp_seealso]
+== See also
+
+* xref:project-name-and-prefix.adoc[]

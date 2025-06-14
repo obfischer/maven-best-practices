@@ -14,6 +14,7 @@ As soon as I have gathered enough knowledge about Maven 4, I will update and ext
 
 == List of Best Practices
 
+. xref:always-prefix-custom-maven-properties.adoc[]
 . xref:dont-abuse-maven.adoc[]
 . xref:keep-your-dependecies-up-to-date.adoc[]
 . xref:project-name-and-prefix.adoc[]

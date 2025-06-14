@@ -3,6 +3,7 @@
 ** xref:survive-a-maven-project.adoc[]
 
 * Best Practices
+** xref:always-prefix-custom-maven-properties.adoc[Prefix you Maven Properties]
 ** xref:dont-abuse-maven.adoc[]
 ** xref:keep-your-dependecies-up-to-date.adoc[]
 ** xref:project-name-and-prefix.adoc[]
