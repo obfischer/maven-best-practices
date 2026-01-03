@@ -1,10 +1,19 @@
 // section_id_prefix: asmv_
 = dddd
-
+:url-maven-wrapper: https://maven.apache.org/tools/wrapper/
+:url-maven-enforder-plugin: https://maven.apache.org/enforcer/maven-enforcer-plugin/
 
 [#asmv_recommendation]
 == Recommendation
 
+1. Lege die Maven-Version fest, die für das Maven-Projekt erforderlich ist.
+2. Nutze den Maven Wrapper um sicherzustellen, dass genau die erforderliche Maven-Version verwendet wird.
+Notizen, zum übersetzen
+
+1. Manche Maven-Versionen erfordern eine bestimmte Maven-Version
+2. Es drückt klar die Mindestanforderung aus (CGM: Installer funktionierte mit neueren Maven-Versionen nicht - stimmt das? Verhalten kann sich ändern in Zusammenspiel von Versionen von Maven und Plugins)
+3. Vermeiden, dass unterschiedliche Maven-Versionen eingesetzt werden. Bei der CGM habe ich 2025 noch 3.0.5 benötigt
+4. Einhaltung wird durch das projekt selber sichergestellt
 1. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
 [#asmv_rationale]
