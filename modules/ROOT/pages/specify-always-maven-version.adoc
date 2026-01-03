@@ -1,37 +1,34 @@
 // section_id_prefix: asmv_
-= dddd
+= Always specify the Maven version to be used
 :url-maven-wrapper: https://maven.apache.org/tools/wrapper/
 :url-maven-enforder-plugin: https://maven.apache.org/enforcer/maven-enforcer-plugin/
+:url-maven-version-plugin: https://www.mojohaus.org/versions/versions-maven-plugin/
 
 [#asmv_recommendation]
 == Recommendation
 
 1. Lege die Maven-Version fest, die für das Maven-Projekt erforderlich ist.
 2. Nutze den Maven Wrapper um sicherzustellen, dass genau die erforderliche Maven-Version verwendet wird.
-Notizen, zum übersetzen
-
-1. Manche Maven-Versionen erfordern eine bestimmte Maven-Version
-2. Es drückt klar die Mindestanforderung aus (CGM: Installer funktionierte mit neueren Maven-Versionen nicht - stimmt das? Verhalten kann sich ändern in Zusammenspiel von Versionen von Maven und Plugins)
-3. Vermeiden, dass unterschiedliche Maven-Versionen eingesetzt werden. Bei der CGM habe ich 2025 noch 3.0.5 benötigt
-4. Einhaltung wird durch das projekt selber sichergestellt
-1. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
 [#asmv_rationale]
 == Rationale
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+Apache Maven wird ständig weiterentwickelt. Auch wenn Maven zwischen den Maven-Versionen keine offensichtlichen großen Änderungen gibt, gibt es doch Fehlerbehebungen und kleinere Änderungen über die Jahre hinweg. Zwischen der Version 3.0 und 3.9.12 liegen fünfzehn Jahre. Maven 3.8 erforderte mindestens Java 7, ab 3.9 wurde die erforderliche Java-Version auf Java 8 angehoben. Sowohl Maven 3.8 und Maven 3.9 können auch mit Java 21 (Stand 2025) ausgeführt werden. Doch gibt es auch immer wieder Breaking Changes, auf die auch in den Release Notes hingewiesen wird. Einige Projekte können ohne weiteres mit Maven 3.3 als auch mit Maven 3.9.12 gebaut werden. Doch es gibt auch Projekte, die mit unterschiedlicher Maven-Version ein unterschiedliches Verhalten aufweisen. Wesentlich ist auch der Zusammenhang zwischen der verwendeten Maven-Version und den Versionen der genutzten Plugins. Bestimmte Versionen eines Plugins für Maven setzten eine bestimmte Maven-Version voraus. Damit hängen Build-Lauf und Maven-Version zusammen. Diese Information ist auch relevant für die Aktualisierung von Plugins, unabhängig davon, ob dies über Maven-Versions-Plugin oder ein Tool wie Renovate erfolgt. Kann das Tool die Maven-Version ermitteln, kann es die richtigen Plugin-Version zum Update vorschlagen.
+
+Gerade in Projekten mit mehreren Entwicklern kann es durch die Nutzung von unterschiedlichen Version zu diffizielen Fehlern kommen. Daher sollte für den Build keine globale auf der benutzen Maschine installierte Maven-Version zum Einsatz kommen, sondern der Maven-Wrapper genutzt werden. Diese kann sicherstellen, dass genau die gewünschte Maven-Version genutzt wird.
+
+Durch die kombinierte Nutzung des Maven Enforcer Plugins zur Erzwingung der gewünschten Maven-Version und dem Maven-Wrapper kann genau dies erreicht werden.
 
 [#asmv__example]
 == Example
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
 
 .XXXXXXX
-[source,xml]
+[source,xml,indent=0]
 ----
-include::example$specify-maven-version/pom.xml[indent=0,tags=enforcer]
+include::example$specify-maven-version/pom.xml[tags=enforcer]
 ----
+
 <1> xxxxx
 
 .xxxxx
@@ -39,3 +36,13 @@ include::example$specify-maven-version/pom.xml[indent=0,tags=enforcer]
 ----
 include::example$require-maven-version.log[]
 ----
+
+
+[#asmv_references]
+== References
+
+. {url-maven-enforder-plugin}[Maven Enforcer Plugin^]
+. {url-maven-wrapper}[Maven Wrapper^]
+. {url-maven-version-plugin}[Maven Version Plugin^]
+
+mvn versions:display-plugin-updates

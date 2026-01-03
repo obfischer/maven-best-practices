@@ -13,7 +13,7 @@
              same Maven version. -->
         <mavenVersion>3.9.10</mavenVersion>
         <spm.enforcer-plugin.version>3.6.2</spm.enforcer-plugin.version>
-        <spm.maven-wrapper-plugin.version>3.3.2</spm.maven-wrapper-plugin.version>
+        <spm.maven-wrapper-plugin.version>3.3.4</spm.maven-wrapper-plugin.version>
     </properties>
 
     <!-- tag::enforcer[] -->
