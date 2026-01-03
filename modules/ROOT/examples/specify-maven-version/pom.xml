@@ -8,7 +8,12 @@
     <version>0.1.0</version>
 
     <properties>
-        <spm.enforcer-plugin.version>3.5.0</spm.enforcer-plugin.version>
+        <!-- Property used by the Maven Wrapper plugin and the
+             Maven Enforcer Plugin so that both can refer to the
+             same Maven version. -->
+        <mavenVersion>3.9.10</mavenVersion>
+        <spm.enforcer-plugin.version>3.6.2</spm.enforcer-plugin.version>
+
     </properties>
 
     <!-- tag::enforcer[] -->
@@ -28,6 +33,11 @@
                             <rules>
                                 <requireMavenVersion>
                                     <version>3.999</version> <!--1-->
+                                    <message><![CDATA[This project requires Maven ${mavenVersion}. You are using Maven
+${maven.version}. Please ensure you are using the correct Maven version via
+the Maven wrapper. Run mvn wrapper:wrapper to ensure, that the configuration
+of the Enforcer plugin and the Maven Wrapper plugin are in sync.]]>
+                                    </message>
                                 </requireMavenVersion>
                             </rules>
                         </configuration>
