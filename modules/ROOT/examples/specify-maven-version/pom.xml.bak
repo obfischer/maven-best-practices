@@ -7,16 +7,16 @@
     <artifactId>specify-maven-version-parent</artifactId>
     <version>0.1.0</version>
 
-    <!-- tag::enforcer[] -->
     <properties>
         <!-- Property used by the Maven Wrapper plugin and the
              Maven Enforcer Plugin so that both can refer to the
              same Maven version. -->
-        <mavenVersion>3.9.10</mavenVersion> <!--1-->
+        <mavenVersion>3.9.10</mavenVersion>
         <spm.enforcer-plugin.version>3.6.2</spm.enforcer-plugin.version>
-        <spm.maven-wrapper-plugin.version>3.3.4</spm.maven-wrapper-plugin.version>
+            <spm.maven-wrapper-plugin.version>3.3.4</spm.maven-wrapper-plugin.version>
     </properties>
 
+    <!-- tag::enforcer[] -->
     <build>
         <plugins>
             <plugin>
@@ -32,7 +32,7 @@
                         <configuration>
                             <rules>
                                 <requireMavenVersion>
-                                    <version>[${mavenVersion}]</version> <!--2-->
+                                    <version>[${mavenVersion}]</version> <!--1-->
                                     <message><![CDATA[This project requires Maven ${mavenVersion}. You are using Maven
 ${maven.version}. Please ensure you are using the correct Maven version via
 the Maven wrapper. Run mvn wrapper:wrapper to ensure that the configuration

@@ -3,6 +3,7 @@
 :url-maven-wrapper: https://maven.apache.org/tools/wrapper/
 :url-maven-enforder-plugin: https://maven.apache.org/enforcer/maven-enforcer-plugin/
 :url-maven-version-plugin: https://www.mojohaus.org/versions/versions-maven-plugin/
+:url-maven-version-ranges: https://maven.apache.org/enforcer/enforcer-rules/versionRanges.html
 
 [#asmv_recommendation]
 == Recommendation
@@ -13,23 +14,37 @@
 [#asmv_rationale]
 == Rationale
 
-Apache Maven wird ständig weiterentwickelt. Auch wenn Maven zwischen den Maven-Versionen keine offensichtlichen großen Änderungen gibt, gibt es doch Fehlerbehebungen und kleinere Änderungen über die Jahre hinweg. Zwischen der Version 3.0 und 3.9.12 liegen fünfzehn Jahre. Maven 3.8 erforderte mindestens Java 7, ab 3.9 wurde die erforderliche Java-Version auf Java 8 angehoben. Sowohl Maven 3.8 und Maven 3.9 können auch mit Java 21 (Stand 2025) ausgeführt werden. Doch gibt es auch immer wieder Breaking Changes, auf die auch in den Release Notes hingewiesen wird. Einige Projekte können ohne weiteres mit Maven 3.3 als auch mit Maven 3.9.12 gebaut werden. Doch es gibt auch Projekte, die mit unterschiedlicher Maven-Version ein unterschiedliches Verhalten aufweisen. Wesentlich ist auch der Zusammenhang zwischen der verwendeten Maven-Version und den Versionen der genutzten Plugins. Bestimmte Versionen eines Plugins für Maven setzten eine bestimmte Maven-Version voraus. Damit hängen Build-Lauf und Maven-Version zusammen. Diese Information ist auch relevant für die Aktualisierung von Plugins, unabhängig davon, ob dies über Maven-Versions-Plugin oder ein Tool wie Renovate erfolgt. Kann das Tool die Maven-Version ermitteln, kann es die richtigen Plugin-Version zum Update vorschlagen.
+Apache Maven wird ständig weiterentwickelt. Auch wenn Maven zwischen den Maven-Versionen keine offensichtlichen großen Änderungen gibt, gibt es doch Fehlerbehebungen und kleinere Änderungen über die Jahre hinweg. Zwischen der Version 3.0 und 3.9.12 liegen fünfzehn Jahre. Maven 3.8 erforderte mindestens Java 7, ab 3.9 wurde die erforderliche Java-Version auf Java 8 angehoben. Sowohl Maven 3.8 und Maven 3.9 können auch mit Java 21 (Stand 2025) ausgeführt werden. Doch gibt es auch immer wieder Breaking Changes, auf die auch in den Release Notes hingewiesen wird. Einige Projekte können ohne weiteres mit Maven 3.3 als auch mit Maven 3.9.12 gebaut werden. Doch es gibt auch Projekte, die mit unterschiedlicher Maven-Version ein unterschiedliches Verhalten aufweisen. Wesentlich ist auch der Zusammenhang zwischen der verwendeten Maven-Version und den Versionen der genutzten Plugins. Bestimmte Versionen eines Plugins für Maven setzten eine bestimmte Maven-Version voraus. Damit hängen Build-Lauf und Maven-Version zusammen. Diese Information ist auch relevant für die Aktualisierung von Plugins, unabhängig davon, ob dies über Maven-Versions-Plugin oder ein Tool wie Renovate erfolgt. Kann das Tool die Maven-Version ermitteln, kann es die richtige Plugin-Version zum Update vorschlagen.
 
-Gerade in Projekten mit mehreren Entwicklern kann es durch die Nutzung von unterschiedlichen Version zu diffizielen Fehlern kommen. Daher sollte für den Build keine globale auf der benutzen Maschine installierte Maven-Version zum Einsatz kommen, sondern der Maven-Wrapper genutzt werden. Diese kann sicherstellen, dass genau die gewünschte Maven-Version genutzt wird.
+Gerade in Projekten mit mehreren Entwicklern kann es durch die Nutzung von unterschiedlichen Versionen zu diffizielen Fehlern kommen. Daher sollte für den Build keine globale auf der benutzten Maschine installierte Maven-Version zum Einsatz kommen, sondern der Maven-Wrapper genutzt werden. Diese kann sicherstellen, dass genau die gewünschte Maven-Version genutzt wird.
 
 Durch die kombinierte Nutzung des Maven Enforcer Plugins zur Erzwingung der gewünschten Maven-Version und dem Maven-Wrapper kann genau dies erreicht werden.
 
 [#asmv__example]
 == Example
 
+In diesem Beispiel wird gezeigt, wie mit dem Maven Enforcer Plugin eine bestimmte Maven-Version erzwungen wird.
+Über die Angabe einer eigenen Fehlermeldung kann in der effektiven Fehlermeldung auch das Maven-Property `maven.version` ausgegeben werden, das die zur Ausführung des Build genutzte Maven-Version enthält.
+Da sowohl die geforderte als auch effektiv genutzte Maven-Version über die Fehlermeldung ausgegeben wird, lässt sich das Problem wesentlich leichter verstehen und lösen.
 
-.XXXXXXX
+Wichtig an der gezeigten Konfiguration ist, dass die geforderte Maven-Version über das Maven-Property `mavenVersion` festgelegt wird.
+Dieses Property wird auch vom {url-maven-wrapper}[Maven Wrapper^] verwendet, um die zu wrappende Maven-Version festzulegen.
+Wird `mavenVersion` ebenfalls für die Konfiguration des Maven Enforcer Plugins verwendet, sind beide Plugins aufeinander abgestimmt.
+
+
+
+.Erzwingen einer bestimmten Maven-Version mittels des Maven Enforcer Plugins
 [source,xml,indent=0]
 ----
 include::example$specify-maven-version/pom.xml[tags=enforcer]
 ----
 
-<1> xxxxx
+<1> Angabe der geforderten Maven-Version
+<2> Festlegung der vom Maven Enforcer Plugins zu erzwingenden Maven-Version.
+   Wichtig ist die Verwendung von `[...]`, um genau diese Version zu erzwingen.
+   Würde die geforderte Version als `<version>${mavenVersion}</version>` angegeben, würde jede Maven-Version ab der festgelegten (`>=`) akzeptiert wird.
+   Mittels `<version>[${mavenVersion}]</version>` wird die Verision auf genau die angegeben Maven-Version (`=`) eingeschränkt.
+   Details zur Angabe von Version kann auf der Seite {url-maven-version-ranges}[Enforcer Version Range Specification] gefunden werden.
 
 .xxxxx
 [source,xml]
@@ -37,12 +52,9 @@ include::example$specify-maven-version/pom.xml[tags=enforcer]
 include::example$require-maven-version.log[]
 ----
 
-
 [#asmv_references]
 == References
 
 . {url-maven-enforder-plugin}[Maven Enforcer Plugin^]
 . {url-maven-wrapper}[Maven Wrapper^]
 . {url-maven-version-plugin}[Maven Version Plugin^]
-
-mvn versions:display-plugin-updates
