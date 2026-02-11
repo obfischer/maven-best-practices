@@ -44,7 +44,7 @@ include::example$specify-maven-version/pom.xml[tags=enforcer]
    Wichtig ist die Verwendung von `[...]`, um genau diese Version zu erzwingen.
    Würde die geforderte Version als `<version>++${mavenVersion}++</version>` angegeben, würde jede Maven-Version ab der festgelegten (`>=`) akzeptiert wird.
    Mittels `<version>[+++${mavenVersion}+++]</version>` wird die Version auf genau die angegebene Maven-Version (`=`) eingeschränkt.
-   Details zur Angabe von Version kann auf der Seite {url-maven-version-ranges}[Enforcer Version Range Specification^] gefunden werden.
+   Details zur Angabe von Version kann auf der Seite {url-maven-version-ranges}[Enforcer Version Range Specification] gefunden werden.
 
 .Effektive Fehlermeldung des Maven Enforcer Plugins
 [source,xml]
