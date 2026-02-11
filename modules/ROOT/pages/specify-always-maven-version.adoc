@@ -1,0 +1,71 @@
+// section_id_prefix: asmv_
+= Always specify the Maven version to be used
+:url-maven-wrapper: https://maven.apache.org/tools/wrapper/
+:url-maven-enforder-plugin: https://maven.apache.org/enforcer/maven-enforcer-plugin/
+:url-maven-version-plugin: https://www.mojohaus.org/versions/versions-maven-plugin/
+:url-maven-version-ranges: https://maven.apache.org/enforcer/enforcer-rules/versionRanges.html
+
+[#asmv_recommendation]
+== Recommendation
+
+1. Specify the Maven version required for the Maven project.
+
+[#asmv_rationale]
+== Rationale
+
+
+Apache Maven is constantly being developed. Although there are no obvious major differences between versions, there are still relevant variations between them.
+
+There are fifteen years between versions 3.0 and 3.9.12.
+Maven 3.8 required Java 7 at least, whereas from version 3.9 onwards, Java 8 was required.
+
+Some projects can be built with either Maven 3.3 or Maven 3.9.12 without any issues. However, some projects behave differently depending on the Maven version used.
+This is because the individual Maven versions use different default plugin versions.
+
+These differences can easily be traced in the documentation for the plugin versions at https://maven.apache.org/ref/3.9.12/maven-core/default-bindings.html[version 3.9.1] and https://maven.apache.org/ref/3.8.5/maven-core/default-bindings.html[version 3.8.5^].
+For example, Version 3.9.12 uses Maven Compiler Plugin 3.13.0, whereas Version 3.8.5 uses Maven Compiler Plugin 3.1.
+
+Especially in projects with multiple developers or different Maven versions in development and in the CI pipeline, errors can occur that are difficult to trace.
+
+By using the Maven Enforcer plugin to enforce the desired Maven version, you can ensure that the correct Maven version is used and that the build is stable and traceable.
+
+[#asmv__example]
+== Example
+
+This example demonstrates how to enforce a specific Maven version using the Maven Enforcer plugin.
+By specifying a custom error message, the Maven property `maven.version`, which contains the version of Maven used to execute the build, can also be included in the error message.
+Having both the required and effective Maven versions in the error message makes the problem much easier to understand and solve.
+
+Please note that the required Maven version is specified using the Maven property mavenVersion in the configuration shown.
+This property is also used by the {url-maven-wrapper}[Maven Wrapper^] to specify the Maven version to be wrapped.
+If `mavenVersion` is used to configure both the Maven Enforcer plugin and the Maven Wrapper, the two plugins are synchronised.
+
+
+.Use the Maven Enforcer plugin to enforce a specific Maven version.
+[source,xml,indent=0]
+----
+include::example$specify-maven-version/pom.xml[tags=enforcer]
+----
+
+<1> Specifying the required Maven version:
+<2> Specifying the Maven version to be enforced by the Maven Enforcer plugin:
+It is important to use `[...]` to enforce this exact version.
+If the required version were specified as `<version>++${mavenVersion}++</version>`, any Maven version from the specified version onwards (`>=`) would be accepted.
+Using `<version>[+++${mavenVersion}+++]</version>` restricts the version to the exact specified Maven version (`=`).
+Details on specifying versions can be found on the Enforcer Version Range Specification page.
+<3> The formatting of the `message` element has been adjusted for this example to make the listing easier to read.
+
+
+.Effective error message from the Maven Enforcer plugin
+[source,xml]
+----
+include::example$require-maven-version.log[]
+----
+
+[#asmv_references]
+== References
+
+. {url-maven-enforder-plugin}[Maven Enforcer Plugin^]
+. {url-maven-version-ranges}[Enforcer Version Range Specification^]
+. {url-maven-wrapper}[Maven Wrapper^]
+. {url-maven-version-plugin}[Maven Version Plugin^]
