@@ -51,7 +51,7 @@ To illustrate this recommendation, let us have a look at the parent POM of a fic
 include::example$common-billing-system/pom.xml[]
 ----
 <1> The name _Customer Billing System_ gives the project a unique name and serves as a source for the abbreviation `cbs`
-<2> `cbs` willbe  also used in the Maven coordinates of the project to make the name of the artifact unique within your Maven artifact universe
+<2> `cbs` will be  also used in the Maven coordinates of the project to make the name of the artifact unique within your Maven artifact universe
 <3> `cbs` will be also used as a common prefix for all project specific Maven properties, to differentiate them from properties used by plugins for Maven and Maven itself
 <4> Also, each Maven module will use the same prefix to ensure that it has a unique name for the module
 
