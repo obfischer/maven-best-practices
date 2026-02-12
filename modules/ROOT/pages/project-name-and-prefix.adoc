@@ -55,7 +55,9 @@ include::example$common-billing-system/pom.xml[]
 <3> `cbs` will be also used as a common prefix for all project specific Maven properties, to differentiate them from properties used by plugins for Maven and Maven itself
 <4> Also, each Maven module will use the same prefix to ensure that it has a unique name for the module
 
+
 [#pnpp_seealso]
 == See also
 
 * xref:always-prefix-custom-maven-properties.adoc[]
+

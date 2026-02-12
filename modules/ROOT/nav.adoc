@@ -7,3 +7,4 @@
 ** xref:dont-abuse-maven.adoc[]
 ** xref:keep-your-dependecies-up-to-date.adoc[]
 ** xref:project-name-and-prefix.adoc[]
+** xref:specify-always-maven-version.adoc[]

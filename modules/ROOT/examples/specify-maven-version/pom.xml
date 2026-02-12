@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.amce.systems.specify.maven.version</groupId> <!--2-->
+    <artifactId>specify-maven-version-parent</artifactId>
+    <version>0.1.0</version>
+
+    <!-- tag::enforcer[] -->
+    <properties>
+        <!-- Property used by the Maven Wrapper plugin and the
+             Maven Enforcer Plugin so that both can refer to the
+             same Maven version. -->
+        <mavenVersion>3.9.10</mavenVersion> <!--1-->
+        <spm.enforcer-plugin.version>3.6.2</spm.enforcer-plugin.version>
+        <spm.maven-wrapper-plugin.version>3.3.4</spm.maven-wrapper-plugin.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${spm.enforcer-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>[${mavenVersion}]</version> <!--2-->
+                                    <message>
+        This project requires Maven ${mavenVersion}. You are using Maven
+        ${maven.version}. Please ensure you are using the correct Maven
+        version via the Maven wrapper. Run mvn wrapper:wrapper to ensure
+        that the configuration of the Enforcer plugin and the Maven Wrapper
+        plugin are in sync. <!--3-->
+                                    </message>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-wrapper-plugin</artifactId>
+                <version>${spm.maven-wrapper-plugin.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+    <!-- end::enforcer[] -->
+</project>
