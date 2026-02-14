@@ -19,6 +19,9 @@ So, let's get started.
 1. Choose a name for your project that best reflects it.
 2. Choose a short abbreviation for your project, with at least three letters.
 
+NOTE: This recommendation does not concern the Maven coordinates of the project.
+The Maven coordinates are technical artefacts. This recommendation concerns a descriptive verbal index for its users.
+
 [#pnpp_rationale]
 == Rationale
 
