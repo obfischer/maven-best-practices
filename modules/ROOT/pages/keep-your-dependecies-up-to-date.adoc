@@ -19,7 +19,7 @@ Otherwise, our code base will rot, as it becomes harder and harder to maintain.
 == Recommendation
 
 . Keep the set of dependencies as small as possible
-. Ensure, that your test coverage is high enough to rely on the existing tests to verify wether an update OK or not
+. Ensure, that your test coverage is high enough to rely on the existing tests to verify wether an update is OK or not
 . Check regularly for new versions
 . Automate the process of updating dependencies
 . Use the {url-versions-plugin}[Maven Versions Plugin^] for manual dependency updates
