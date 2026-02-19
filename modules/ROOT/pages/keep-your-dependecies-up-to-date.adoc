@@ -37,7 +37,7 @@ This can be compared very well to an iceberg.
 Our code is the small part of the iceberg that sticks out of the water.
 The much larger part, the dependencies, is mostly invisible.
 
-Therefore, dependencies should be kept always up to date as far as possible so that any security hole ca be closed quickly an incompatibilities can be identified at an early stage.
+Therefore, dependencies should be kept always up to date as far as possible so that any security hole can be closed quickly and incompatibilities between versions can be identified at an early stage.
 
 [#kdup_example]
 == Example
