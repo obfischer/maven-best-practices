@@ -1,7 +1,7 @@
 {
   "name": "knowledge-maven-best-practices",
   "devDependencies": {
-    "@antora/cli": "3.1.15"
+    "@antora/cli": "3.2.0"
   },
   "dependencies": {
     "@antora/collector-extension": "^1.0.3",
